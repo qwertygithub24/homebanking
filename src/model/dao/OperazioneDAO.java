@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import model.entities.Utente;
+import model.entities.Filiale;
 
 public class OperazioneDAO extends ObjectDAO {
 
@@ -15,16 +16,16 @@ public class OperazioneDAO extends ObjectDAO {
         String str_data=sdf.format(op.getData());
         String str_data_conferma_cassiere=sdf.format(op.getData_conferma_cassiere());
         
-        String sql="INSERT INTO operazione (data, hash, importo, tipologia, stato, data_conferma_cassiere, cliente_id, filiale_id, cassiere_id) VALUES ('"
-                +str_data+"', '"
-                +op.getHash()+"', '"
-                +op.getImporto()+"', '"
-                +op.getTipologia()+"', '"
-                +op.getStato()+"', '"
-                +str_data_conferma_cassiere+"', '"
-                +op.getCliente().getId()+"', '"
-                +op.getFiliale().getId()+"', '"
-                +op.getCassiere().getId()+")";
+        String sql="INSERT INTO operazione (data, hash, importo, tipologia, stato, data_conferma_cassiere, cliente_id, filiale_id, cassiere_id) VALUES ("+
+                "'"+str_data+"',"+
+                "'"+op.getHash()+"',"+
+                "'"+op.getImporto()+"',"+
+                "'"+op.getTipologia()+"',"+
+                "'"+op.getStato()+"',"+
+                "'"+str_data_conferma_cassiere+"',"+
+                "'"+op.getCliente().getId()+"',"+
+                "'"+op.getFiliale().getId()+"',"+
+                "'"+op.getCassiere().getId()+"')";
         return super.insert(sql);
     }
     
@@ -33,7 +34,7 @@ public class OperazioneDAO extends ObjectDAO {
         String str_data=sdf.format(op.getData());
         String str_data_conferma_cassiere=sdf.format(op.getData_conferma_cassiere());
         
-        String sql="UPDATE servizio SET "+
+        String sql="UPDATE operazione SET "+
                 "data='"+str_data+"',"+
                 "hash='"+op.getHash()+"',"+
                 "importo='"+op.getImporto()+"',"+                
@@ -41,6 +42,7 @@ public class OperazioneDAO extends ObjectDAO {
                 "stato='"+op.getStato()+"',"+
                 "data_conferma_cassiere='"+str_data_conferma_cassiere+"',"+
                 "cliente_id='"+op.getCliente().getId()+"',"+
+                "filiale_id='"+op.getFiliale().getId()+"',"+
                 "cassiere_id='"+op.getCassiere().getId()+"'"+                
                 " WHERE id='"+op.getId()+"'";
         
@@ -92,7 +94,7 @@ public class OperazioneDAO extends ObjectDAO {
     }
 
     public ArrayList<Operazione> findAll() {
-        ResultSet rs = super.findAll("prodotto");
+        ResultSet rs = super.findAll("operazione");
         ArrayList<Operazione> listaOperazioni = getArrayListFromResultSet(rs);        
         return listaOperazioni;
     }
@@ -105,7 +107,7 @@ public class OperazioneDAO extends ObjectDAO {
                 op.setHash(rs.getString("hash"));
                 op.setImporto(rs.getFloat("importo"));
                 op.setTipologia(rs.getString("tipologia"));
-                op.setStato(rs.getString("Stato"));
+                op.setStato(rs.getString("stato"));
                 op.setData_conferma_cassiere(rs.getDate("data_conferma_cassiere"));
                 
                 //determina il cliente
@@ -116,6 +118,11 @@ public class OperazioneDAO extends ObjectDAO {
                 //determina il cassiere
                 Utente cassiere=udao.findById(rs.getInt("cassiere_id"));
                 op.setCliente(cassiere);
+                
+                //determina il cassiere
+                FilialeDAO fdao=new FilialeDAO();
+                Filiale filiale=fdao.findById(rs.getInt("filiale_id"));
+                op.setFiliale(filiale);
                                     
         } catch (SQLException e) {
             e.printStackTrace();

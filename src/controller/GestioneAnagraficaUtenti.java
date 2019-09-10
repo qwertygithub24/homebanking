@@ -117,11 +117,10 @@ public class GestioneAnagraficaUtenti {
                         int row = pos.getRow();
                         int column = pos.getColumn();
                         if(row>=0 && row < tblData.size()) {
-                            cliente = (Utente) tblUtenti.getItems().get(row);
-                            Session.getInstance().setSelectedUtente(cliente);
+                            cliente = (Utente) tblUtenti.getItems().get(row); 
+                            Session.getInstance().setSelectedCliente(cliente);
                             refreshFields();
                         }
-                        //label.setText(selectedValue);
                     }
                 });
         refreshTable();
@@ -181,9 +180,15 @@ public class GestioneAnagraficaUtenti {
 
     }
     
-    public void deleteUtente(ActionEvent actionEvent){
-        Utente u = utenteFromForm();
-        utenteDAO.insert(u);
+    public void deleteUtente(ActionEvent actionEvent) {
+        //Che sia cliente
+        //Che non abbia operazioni --- Richiesta cancellazione storico operazioni, servizi, prodotti, anagrafica
+        
+        boolean b_delete=utenteDAO.delete(cliente);
+        if(b_delete==true)
+            Session.getInstance().openInfoDialog("Cancellazione", "Cancellazione corretta", "Cancellazione avvenuta correttamente");
+        else
+            Session.getInstance().openErrorDialog("Errore", "Errore cancellazione", "Errore di cancellazione");
         refreshTable();
     }
 
@@ -211,6 +216,7 @@ public class GestioneAnagraficaUtenti {
             Session.getInstance().openInfoDialog("Operazione conclusa", 
                                                          "Cliente registrato", 
                                                          "Cliente registrato e servizio attivato");
+            refreshTable();
         }        
     }
     

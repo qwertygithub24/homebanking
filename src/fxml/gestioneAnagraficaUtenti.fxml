@@ -25,7 +25,7 @@
          </font>
       </Label>
       <TextField fx:id="txtEmail" layoutX="188.0" layoutY="146.0" prefHeight="25.0" prefWidth="187.0" />
-      <Button fx:id="btnFind" layoutX="302.0" layoutY="289.0" mnemonicParsing="false" onAction="#findUtente" prefHeight="25.0" prefWidth="78.0" text="Cerca" />
+      <Button fx:id="btnFind" layoutX="296.0" layoutY="289.0" mnemonicParsing="false" onAction="#findUtente" prefHeight="27.0" prefWidth="84.0" text="Cerca" />
       <Label layoutX="34.0" layoutY="69.0" prefHeight="25.0" prefWidth="128.0" text="cognome:">
          <font>
             <Font size="14.0" />
@@ -61,7 +61,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="btnInsert" layoutX="28.0" layoutY="289.0" mnemonicParsing="false" onAction="#insertUtente" prefHeight="25.0" prefWidth="89.0" text="Inserisci" />
+      <Button fx:id="btnInsert" layoutX="28.0" layoutY="289.0" mnemonicParsing="false" onAction="#insertUtente" prefHeight="27.0" prefWidth="71.0" text="Inserisci" />
       <TextField fx:id="txtUsername" layoutX="188.0" layoutY="201.0" prefHeight="25.0" prefWidth="187.0" />
       <PasswordField fx:id="txtPassword" layoutX="188.0" layoutY="228.0" prefHeight="25.0" prefWidth="187.0" />
       <DatePicker fx:id="dtDataNascita" layoutX="188.0" layoutY="172.0" prefHeight="27.0" prefWidth="187.0" />
@@ -114,6 +114,7 @@
       <Label fx:id="lblUtente" layoutX="662.0" layoutY="13.0" text="Utente" />
       <Label fx:id="lblBanca" layoutX="17.0" layoutY="602.0" text="Banca" />
       <Label fx:id="lblFiliale" layoutX="322.0" layoutY="602.0" text="Filiale" />
-      <Button fx:id="btnUpdate" layoutX="188.0" layoutY="289.0" mnemonicParsing="false" onAction="#updateUtente" prefHeight="25.0" prefWidth="89.0" text="Aggiorna" />
+      <Button fx:id="btnUpdate" layoutX="188.0" layoutY="289.0" mnemonicParsing="false" onAction="#updateUtente" prefHeight="27.0" prefWidth="98.0" text="Aggiorna" />
+      <Button fx:id="btnDelete" layoutX="106.0" layoutY="289.0" mnemonicParsing="false" onAction="#deleteUtente" prefHeight="27.0" prefWidth="71.0" text="Elimina" />
    </children>
 </AnchorPane>
